@@ -10,15 +10,16 @@ exports.index = (req, res) => {
 
     // Get all items from the database
     item.find({})
-    .exec(function (err, list_items) {
-        if (err) {
-            return next(err);
-        }
-        // Successful so send items to view
-        res.render('itemsIndex', {
-            title: 'Items Index Page',
-            message: 'This is where all the items will be displayed',
-            all_items: list_items,
-        });
-    })
+        .sort({_id: 1})
+        .exec(function (err, list_items) {
+            if (err) {
+                return next(err);
+            }
+            // Successful so send items to view
+            res.render('itemsIndex', {
+                title: 'Items Index Page',
+                message: 'This is where all the items will be displayed',
+                all_items: list_items,
+            });
+        })
 } 

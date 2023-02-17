@@ -25,22 +25,22 @@ router.get('/:id', function(req, res, next) {
 
 /* GET request to delete item */
 router.get('/:id/delete', function(req, res, next) {
-    res.send('Item Delete GET');
+    res.send(`Item ${req.params.id} Delete GET`);
 });
 
 /* POST request to delete item */
 router.post('/:id/delete', function(req, res, next) {
-    res.send('Item Delete POST');
+    res.send(`Item ${req.params.id} Delete POST`);
 });
 
 /* Get request to update item */
 router.get('/:id/update', function(req, res, next) {
-    res.send('Item Update GET');
+    res.send(`Item ${req.params.id} Update GET`);
 });
 
 /* POST request to update item */
 router.post('/:id/update', function(req, res, next) {
-    res.send('Item Update POST');
+    res.send(`Item ${req.params.id} Update POST`);
 });
 
 module.exports = router;

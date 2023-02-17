@@ -17,5 +17,7 @@ block content
                     label URL: #{item.url}
 
                     div(class='individualOptionsMenu')
-                        button Edit 
-                        button Delete
+                        a(href='/items/'+item.id + '/update')  
+                            button Edit
+                        a(href='/items/'+item.id + '/delete')
+                            button Delete

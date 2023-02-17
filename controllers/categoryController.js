@@ -9,6 +9,7 @@ exports.index = (req, res) => {
 
     // Get all items from the database
     category.find({})
+        .sort({_id: 1})
         .exec(function (err, list_categories) {
         if (err) {
           return next(err);

@@ -12,3 +12,9 @@ block content
                         li=category.name
                         li=category.description
                         li=category.url
+
+                        div(class='individualOptionsMenu')
+                            a(href='/categories/'+category.id + '/update')  
+                                button Edit
+                            a(href='/categories/'+category.id + '/delete')
+                                button Delete
