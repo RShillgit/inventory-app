@@ -6,8 +6,18 @@ const item = require('../models/item');
 const async = require("async");
 
 exports.index = (req, res) => {
-    res.render('categoriesIndex', {
-        title: 'Categories Index Page',
-        message: 'This is where all the categories will be displayed',
-    });
+
+    // Get all items from the database
+    category.find({})
+        .exec(function (err, list_categories) {
+        if (err) {
+          return next(err);
+        }
+        // Successful so send items to view
+        res.render('categoriesIndex', {
+            title: 'Categories Index Page',
+            message: 'This is where all the categories will be displayed',
+            all_categories: list_categories,
+        })
+    }) 
 }

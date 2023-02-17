@@ -6,3 +6,26 @@ body {
 a {
   color: #00B7FF;
 }
+
+.allItemsContainer, .allCategoriesContainer {
+  border: 1px solid red;
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+
+}
+
+.individualItem, .individualCategory {
+  padding: 1rem;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.individualOptionsMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

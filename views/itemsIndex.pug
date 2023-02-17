@@ -1,5 +1,21 @@
 extends layout
 
 block content
-  h1= title
-  p #{message}
+
+    h1= title
+    p #{message}
+
+    div(class='allItemsContainer')
+        
+            each item in all_items
+                div(class='individualItem')
+                    label Item Name: #{item.name}
+                    label Description: #{item.description}
+                    label Category: #{item.category}
+                    label Price: #{item.price}
+                    label Number in stock: #{item.number_in_stock}
+                    label URL: #{item.url}
+
+                    div(class='individualOptionsMenu')
+                        button Edit 
+                        button Delete

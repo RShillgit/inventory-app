@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p #{message}
+
+    h1= title
+    p #{message}
+
+    div(class='allCategoriesContainer')
+            each category in all_categories
+                div(class='individualCategory')
+                    ul
+                        li=category.name
+                        li=category.description
+                        li=category.url
