@@ -5,14 +5,10 @@ const category = require('../models/category');
 
 const async = require("async");
 
-// Display index page
+// Display index page of all items
 exports.index = (req, res) => {
-    res.render('index', {
-        title: 'Index Page',
+    res.render('itemsIndex', {
+        title: 'Items Index Page',
+        message: 'This is where all the items will be displayed',
     });
-}
-
-// Display list of all items
-exports.items_list = (req, res) => {
-    res.send('Items List Page');
 }
