@@ -1,0 +1,33 @@
+extends layout
+
+block content
+
+    form(method='POST' action='')
+        div(class='item_create_form_info')
+
+            div(class='item_create_form_info_row')
+                label(for='item_name') Item Name: 
+                input#item_name(type='text' value=(item.name) required='true' name='name')
+
+            div(class='item_create_form_info_row')
+                label(for='item_description') Description: 
+                input#item_description(type='text' value=(item.description) required='true' name='description')
+
+            div(class='item_create_form_info_row')
+                label(for='item_category') Category: 
+                input#item_category(type='text' value=(itemCategory.name) required='true' name='category')
+
+            div(class='item_create_form_info_row')
+                label(for='item_price') Price $ 
+                input#item_price(type='number' value=(item.price) required='true' step='.01' name='price')
+
+            div(class='item_create_form_info_row')
+                label(for='item_stock') Number in stock: 
+                input#item_stock(type='number' value=(item.number_in_stock) required='true' name='number_in_stock')
+
+            button(type='submit') Update
+    
+    if errors
+        ul
+        for error in errors
+            li!= error.msg

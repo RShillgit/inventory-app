@@ -8,10 +8,15 @@ block content
     div(class='allItemsContainer')
         
             each item in all_items
+            
                 div(class='individualItem')
                     label Item Name: #{item.name}
                     label Description: #{item.description}
-                    label Category: #{item.category}
+
+                    each category in all_categories
+                        if item.category.toString() === category._id.toString()
+                            label Category: #{category.name}                   
+                    
                     label Price: #{item.price}
                     label Number in stock: #{item.number_in_stock}
                     label URL: #{item.url}

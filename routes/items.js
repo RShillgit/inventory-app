@@ -34,13 +34,9 @@ router.post('/:id/delete', function(req, res, next) {
 });
 
 /* Get request to update item */
-router.get('/:id/update', function(req, res, next) {
-    res.send(`Item ${req.params.id} Update GET`);
-});
+router.get('/:id/update', item_controller.updateGET);
 
 /* POST request to update item */
-router.post('/:id/update', function(req, res, next) {
-    res.send(`Item ${req.params.id} Update POST`);
-});
+router.post('/:id/update', item_controller.updatePOST);
 
 module.exports = router;

@@ -29,3 +29,14 @@ a {
   align-items: center;
   gap: 1rem;
 }
+
+.item_create_form_info, .category_create_form_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_create_form_info_row, .category_create_form_info_row {
+  margin: 0.5rem;
+}
