@@ -149,3 +149,110 @@ exports.updatePOST = [
         });
     }
 ]
+
+// Displays delete item page 
+exports.deleteGET = (req, res) => {
+
+    // Get selected category and all items from the database
+    async.parallel(
+        {
+            specificCategory(callback) {
+                category.findById(req.params.id)
+                    .exec(callback)
+            },
+            allItems(callback) {
+                item.find({})
+                .exec(callback)
+            }
+            
+        },
+        (err, results) => {
+            if(err) {
+                return next(err)
+            }
+            // Success
+            const allAssociatedItems = results.allItems.filter((ite) => {
+                return ite.category.toString() === results.specificCategory._id.toString();
+            })
+            res.render('categoryDelete', {
+                title: 'Delete Category',
+                category: results.specificCategory,
+                allAssociatedItems: allAssociatedItems,
+            })
+        }
+    )
+}
+
+// Deletes an item 
+exports.deletePOST = (req, res) => {
+
+    // Get selected category and all items from the database
+    async.parallel(
+        {
+            specificCategory(callback) {
+                category.findById(req.params.id)
+                    .exec(callback)
+            },
+            allItems(callback) {
+                item.find({})
+                .exec(callback)
+            }
+            
+        },
+        (err, results) => {
+            if(err) {
+                return next(err)
+            }
+
+            // Check if there are any items in this category
+            const allAssociatedItems = results.allItems.filter((ite) => {
+                return ite.category.toString() === results.specificCategory._id.toString();
+            })
+            
+            // If there are items in this category return an error message
+            if(allAssociatedItems.length > 0) {
+
+                // Get selected category and all items from the database
+                async.parallel(
+                    {
+                        specificCategory(callback) {
+                            category.findById(req.params.id)
+                                .exec(callback)
+                        },
+                        allItems(callback) {
+                            item.find({})
+                            .exec(callback)
+                        }
+                        
+                    },
+                    (err, results) => {
+                        if(err) {
+                            return next(err)
+                        }
+                        // Get Associated Items
+                        const allAssociatedItems = results.allItems.filter((ite) => {
+                            return ite.category.toString() === results.specificCategory._id.toString();
+                        })
+                        res.render('categoryDelete', {
+                            title: 'Delete Category',
+                            category: results.specificCategory,
+                            allAssociatedItems: allAssociatedItems,
+                            err: 'There are items in this category.  In order to delete this category, the associated items must be deleted first.',
+                        })
+                    }
+                )}
+
+            // If there are no items in this category then delete it
+            else {
+                category.deleteOne({_id: results.specificCategory._id})
+                .exec(function(err, results) {
+                    if(err) {
+                        return next(err)
+                    }
+                    // Go back to categories page
+                    res.redirect('/categories')
+                })
+            }
+        }
+    )
+}

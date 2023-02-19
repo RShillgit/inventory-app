@@ -46,7 +46,7 @@ a {
   margin: 0.5rem;
 }
 
-.delete_item_info {
+.delete_item_info, .delete_category_info {
   border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -65,6 +65,14 @@ a {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.associated_items {
+  display: flex;
+  flex-direction: column;
+}
+.associated_items ul {
+  margin-top: 0;
 }
 
 .errors {

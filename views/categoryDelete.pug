@@ -1,0 +1,36 @@
+extends layout
+
+block content
+
+    div(class='page-header')
+        h1=title
+
+    div(class='delete_category_info')
+        p=category.name 
+        p=category.description 
+
+        if allAssociatedItems.length > 0
+            div(class='associated_items')
+                h4 Items in this category:
+
+                ul
+                    each item in allAssociatedItems
+                        li
+                            a(href='/items/' + item.id)=item.name
+        else 
+            div(class='associated_items')
+                h4 There are no items in this category
+                    
+
+    div(class='delete_confirmation')
+        p Are you sure you want to delete this Category?
+
+        div(class='form_buttons')
+            a(href='/categories')
+                button No 
+            form(method='POST' action='')
+                button(type='submit') Yes
+    
+    if err
+    div(class='errors')
+        h3=err

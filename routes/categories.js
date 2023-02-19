@@ -24,14 +24,10 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* GET request to delete a category */
-router.get('/:id/delete', function(req, res, next) {
-    res.send('Category Delete GET');
-});
+router.get('/:id/delete', category_controller.deleteGET);
 
 /* POST request to delete a category */
-router.post('/:id/delete', function(req, res, next) {
-    res.send('Category Delete POST');
-});
+router.post('/:id/delete', category_controller.deletePOST);
 
 /* Get request to update a category */
 router.get('/:id/update', category_controller.updateGET);
