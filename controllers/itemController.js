@@ -96,7 +96,6 @@ exports.createPOST = [
                     err: 'This category does not exist.  Use existing categories or create a new category.',
                 })
             }
-            
         })
     } 
 ]
@@ -228,4 +227,59 @@ exports.updatePOST = [
         });
     }
 ]
+
+// Displays delete item page 
+exports.deleteGET = (req, res) => {
+
+    // Get selected item and all categories from the database
+    async.parallel(
+        {
+            specificItem(callback) {
+                item.findById(req.params.id)
+                    .exec(callback)
+            },
+            allCategories(callback) {
+                category.find({})
+                .exec(callback)
+            }
+            
+        },
+        (err, results) => {
+            if(err) {
+                return next(err)
+            }
+            // Success
+            const itemsCategory = results.allCategories.find((cat) => {
+                return cat._id.toString() === results.specificItem.category.toString();
+            })
+            res.render('itemDelete', {
+                title: 'Delete Item',
+                item: results.specificItem,
+                itemCategory: itemsCategory,
+            })
+        }
+    )
+}
+
+// Deletes an item 
+exports.deletePOST = (req, res) => {
+
+    // Get the item for deletion
+    item.findById(req.params.id)
+        .exec(function(err, results) {
+            if(err) {
+                return next(err)
+            }
+
+            // If item is found delete it
+            item.deleteOne({_id: results._id})
+            .exec(function(err, results) {
+                if(err) {
+                    return next(err)
+                }
+                // Go back to index page
+                res.redirect('/items')
+            })
+        }) 
+}
 

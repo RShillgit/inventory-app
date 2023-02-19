@@ -24,14 +24,10 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* GET request to delete item */
-router.get('/:id/delete', function(req, res, next) {
-    res.send(`Item ${req.params.id} Delete GET`);
-});
+router.get('/:id/delete', item_controller.deleteGET);
 
 /* POST request to delete item */
-router.post('/:id/delete', function(req, res, next) {
-    res.send(`Item ${req.params.id} Delete POST`);
-});
+router.post('/:id/delete', item_controller.deletePOST);
 
 /* Get request to update item */
 router.get('/:id/update', item_controller.updateGET);

@@ -52,8 +52,27 @@ a {
   margin: 0.5rem;
 }
 
+.delete_item_info {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete_confirmation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.delete_confirmation_buttons {
+  display: flex;
+  gap: 1rem;
+}
+
 .errors {
   display: flex;
   justify-content: center;
-  
+
 }

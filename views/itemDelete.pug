@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+    div(class='page-header')
+        h1=title
+
+    div(class='delete_item_info')
+        p=item.name 
+        p=item.description 
+        p=itemCategory.name 
+        p=item.price 
+        p=item.number_in_stock
+
+    div(class='delete_confirmation')
+        p Are you sure you want to delete this item?
+
+        div(class='delete_confirmation_buttons')
+            a(href='/items')
+                button No 
+            form(method='POST' action='')
+                button(type='submit') Yes
+    
+    if err
+    div(class='errors')
+        h3=err
