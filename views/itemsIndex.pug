@@ -2,8 +2,12 @@ extends layout
 
 block content
 
-    h1= title
-    p #{message}
+    div(class='page-header')
+            h1=title
+
+    div(class='nav')
+        a(href='/items/create')  
+            button Create Item
 
     div(class='allItemsContainer')
         

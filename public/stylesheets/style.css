@@ -7,11 +7,22 @@ a {
   color: #00B7FF;
 }
 
+.page-header {
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
 .allItemsContainer, .allCategoriesContainer {
   border: 1px solid red;
   display: grid;
   gap: 1rem;
   padding: 1rem;
+  margin: 1rem;
   grid-template-columns: repeat(3, 1fr);
 
 }
@@ -30,13 +41,19 @@ a {
   gap: 1rem;
 }
 
-.item_create_form_info, .category_create_form_info {
+.item_update_form_info, .category_update_form_info, .item_create_form_info, .category_create_form_info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.item_create_form_info_row, .category_create_form_info_row {
+.item_update_form_info_row, .category_update_form_info_row, .item_create_form_info_row, .category_create_form_info_row {
   margin: 0.5rem;
+}
+
+.errors {
+  display: flex;
+  justify-content: center;
+  
 }

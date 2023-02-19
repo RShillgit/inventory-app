@@ -10,13 +10,13 @@ router.get('/', item_controller.index);
 
 /* GET request for creating an item */
 router.get('/create', function(req, res, next) {
-    res.send('Item Create GET');
+    res.render('itemCreate', {
+        title: 'Create Item'
+    });
 });
 
 /* Post request for creating an item */
-router.post('/create', function(req, res, next) {
-    res.send('Item Create POST');
-});
+router.post('/create', item_controller.createPOST);
 
 /* GET request for one item */
 router.get('/:id', function(req, res, next) {

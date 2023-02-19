@@ -27,13 +27,79 @@ exports.index = (req, res) => {
             }
             res.render('itemsIndex', {
                 title: 'Items Index Page',
-                message: 'This is where all the items will be displayed',
                 all_items: results.allItems,
                 all_categories: results.allCategories,
             })
         }
     )
 } 
+
+// Creates Item
+exports.createPOST = [
+
+    // Validate and sanitize fields.
+    body("name", "Name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+    body("description", "Description must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+    body("category", "Category must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // There are errors. Render form again.
+        if (!errors.isEmpty()) {
+            res.render('itemCreate', {
+                err: err,
+            })
+        }  
+
+        // Check to see if category exists, if not create a new one
+        category.findOne({ name: req.body.category }).exec((err, results) => {
+            if (err) {
+                return next(err);
+            }
+
+            // If it exists set the item category equal to the category id
+            if (results) {
+                console.log(results._id)
+                
+                const newItem = new item({
+                    name: req.body.name,
+                    description: req.body.description,
+                    category: results._id,
+                    price: req.body.price,
+                    number_in_stock: req.body.number_in_stock,
+                })
+                newItem.save((err, results) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    // Successful: redirect to items page.
+                    res.redirect('/items');
+                })
+            }
+
+            // If it doesnt render error message
+            else {
+                res.render('itemCreate', {
+                    err: 'This category does not exist.  Use existing categories or create a new category.',
+                })
+            }
+            
+        })
+    } 
+]
 
 // Display proper information in update form
 exports.updateGET = (req, res) => {
@@ -60,6 +126,7 @@ exports.updateGET = (req, res) => {
                 return cat._id.toString() === results.specificItem.category.toString();
             })
             res.render('itemUpdate', {
+                title: 'Update Item',
                 item: results.specificItem,
                 itemCategory: itemsCategory,
             })
@@ -90,7 +157,7 @@ exports.updatePOST = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Book object with escaped/trimmed data and old id.
+        // Create an item object with escaped/trimmed data and old id.
         const newItem = new item({
             name: req.body.name,
             description: req.body.description,
@@ -124,6 +191,7 @@ exports.updatePOST = [
                         return cat._id.toString() === results.specificItem.category.toString();
                     })
                     res.render('itemUpdate', {
+                        title: 'Update Item',
                         item: results.specificItem,
                         itemCategory: itemsCategory,
                     })
@@ -155,14 +223,6 @@ exports.updatePOST = [
                         return next(err)
                     }
                     res.redirect('/items');
-                    /*
-                    res.render('itemsIndex', {
-                        title: 'Items Index Page',
-                        message: 'This is where all the items will be displayed',
-                        all_items: results.allItems,
-                        all_categories: results.allCategories,
-                    })
-                    */
                 }
             )
         });
