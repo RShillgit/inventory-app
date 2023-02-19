@@ -12,6 +12,12 @@ a {
   justify-content: center;
 }
 
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .nav {
   display: flex;
   justify-content: center;
