@@ -21,7 +21,8 @@ block content
 
                     each category in all_categories
                         if item.category.toString() === category._id.toString()
-                            label Category: #{category.name}                   
+                            label Category:   
+                                a(href='/categories/' + category._id)=category.name                
                     
                     label Price: #{item.price}
                     label Number in stock: #{item.number_in_stock}

@@ -34,6 +34,39 @@ exports.index = (req, res) => {
     )
 } 
 
+exports.individualGET = (req, res) => {
+
+    // Get selected item and all categories from the database
+    async.parallel(
+        {
+            specificItem(callback) {
+                item.findById(req.params.id)
+                    .exec(callback)
+            },
+            allCategories(callback) {
+                category.find({})
+                .exec(callback)
+            }
+            
+        },
+        (err, results) => {
+            if(err) {
+                return next(err)
+            }
+
+            // Get the items category
+            const itemsCategory = results.allCategories.find((cat) => {
+                return cat._id.toString() === results.specificItem.category.toString();
+            })
+            res.render('itemView', {
+                title: 'Individual Item',
+                item: results.specificItem,
+                itemCategory: itemsCategory,
+            })
+        }
+    )
+}
+
 // Creates Item
 exports.createPOST = [
 
@@ -72,7 +105,6 @@ exports.createPOST = [
 
             // If it exists set the item category equal to the category id
             if (results) {
-                console.log(results._id)
                 
                 const newItem = new item({
                     name: req.body.name,

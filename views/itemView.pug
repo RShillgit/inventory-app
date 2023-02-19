@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+    div(class='page-header')
+        h1=title
+
+    div(class='item_info')
+        p=item.name 
+        p=item.description 
+        a(href='/categories/' + itemCategory._id)=itemCategory.name
+        p=item.price 
+        p=item.number_in_stock
+
+        div(class='nav')
+            a(href='/items')  
+                button Items
+            a(href='/categories')  
+                button Categories
+            

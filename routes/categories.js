@@ -19,9 +19,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', category_controller.createPOST);
 
 /* GET request for one category */
-router.get('/:id', function(req, res, next) {
-    res.send(`Category ${req.params.id}`);
-});
+router.get('/:id', category_controller.individualGET);
 
 /* GET request to delete a category */
 router.get('/:id/delete', category_controller.deleteGET);

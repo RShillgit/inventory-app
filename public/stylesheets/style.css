@@ -35,6 +35,16 @@ a {
   flex-direction: column;
 }
 
+.item_info, .category_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+}
+.item_info .nav, .category_info .nav {
+  margin-bottom: 1rem;
+}
+
 .item_update_form_info, .category_update_form_info, .item_create_form_info, .category_create_form_info {
   display: flex;
   flex-direction: column;

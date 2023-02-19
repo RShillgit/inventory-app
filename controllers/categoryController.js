@@ -22,6 +22,38 @@ exports.index = (req, res) => {
     }) 
 }
 
+exports.individualGET = (req, res) => {
+
+    // Get selected category and all items from the database
+    async.parallel(
+        {
+            specificCategory(callback) {
+                category.findById(req.params.id)
+                    .exec(callback)
+            },
+            allItems(callback) {
+                item.find({})
+                .exec(callback)
+            }
+            
+        },
+        (err, results) => {
+            if(err) {
+                return next(err)
+            }
+            // Get all items associated with this category
+            const allAssociatedItems = results.allItems.filter((ite) => {
+                return ite.category.toString() === results.specificCategory._id.toString();
+            })
+            res.render('categoryView', {
+                title: 'Individual Category',
+                category: results.specificCategory,
+                allAssociatedItems: allAssociatedItems,
+            })
+        }
+    )
+}
+
 // Creates category
 exports.createPOST = [
 

@@ -19,9 +19,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', item_controller.createPOST);
 
 /* GET request for one item */
-router.get('/:id', function(req, res, next) {
-    res.send(`Item ${req.params.id}`);
-});
+router.get('/:id', item_controller.individualGET);
 
 /* GET request to delete item */
 router.get('/:id/delete', item_controller.deleteGET);

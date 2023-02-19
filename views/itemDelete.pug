@@ -8,7 +8,7 @@ block content
     div(class='delete_item_info')
         p=item.name 
         p=item.description 
-        p=itemCategory.name 
+        a(href='/categories/' + itemCategory._id)=itemCategory.name
         p=item.price 
         p=item.number_in_stock
 

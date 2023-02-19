@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+    div(class='page-header')
+        h1=title
+
+    div(class='category_info')
+        p=category.name 
+        p=category.description 
+
+        if allAssociatedItems.length > 0
+            div(class='associated_items')
+                h4 Items in this category:
+
+                ul
+                    each item in allAssociatedItems
+                        li
+                            a(href='/items/' + item.id)=item.name
+        else 
+            div(class='associated_items')
+                h4 There are no items in this category
+                    
+        div(class='nav')
+            a(href='/categories')  
+                button Categories
+            a(href='/items')  
+                button Items
+            
