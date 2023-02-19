@@ -34,13 +34,9 @@ router.post('/:id/delete', function(req, res, next) {
 });
 
 /* Get request to update a category */
-router.get('/:id/update', function(req, res, next) {
-    res.send('Category Update GET');
-});
+router.get('/:id/update', category_controller.updateGET);
 
 /* POST request to update a category */
-router.post('/:id/update', function(req, res, next) {
-    res.send('Category Update POST');
-});
+router.post('/:id/update', category_controller.updatePOST);
 
 module.exports = router;

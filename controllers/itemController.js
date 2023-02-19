@@ -203,27 +203,7 @@ exports.updatePOST = [
             if (err) {
                 return next(err);
             }
-            
-            // Get selected item and all categories from the database
-            async.parallel(
-                {
-                    allItems(callback) {
-                        item.find({})
-                            .sort({_id: 1})
-                            .exec(callback)
-                    },
-                    allCategories(callback) {
-                        category.find({})
-                        .exec(callback)
-                    }
-                },
-                (err, results) => {
-                    if(err) {
-                        return next(err)
-                    }
-                    res.redirect('/items');
-                }
-            )
+            res.redirect('/items');
         });
     }
 ]

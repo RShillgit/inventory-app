@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+    div(class='page-header')
+        h1=title
+
+    form(method='POST' action='')
+        div(class='category_update_form_info')
+
+            div(class='category_update_form_info_row')
+                label(for='category_name') Category Name: 
+                input#category_name(type='text' value=(category.name) required='true' name='name')
+
+            div(class='category_update_form_info_row')
+                label(for='category_description') Description: 
+                input#category_description(type='text' value=(category.description) required='true' name='description')
+
+            div(class='form_buttons')
+                a(href='/categories/')  
+                    button(type='button') Cancel
+
+                button(type='submit') Update
+    
+    if errors
+        ul
+        for error in errors
+            li!= error.msg

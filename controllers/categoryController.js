@@ -7,14 +7,14 @@ const async = require("async");
 
 exports.index = (req, res) => {
 
-    // Get all items from the database
+    // Get all categories from the database
     category.find({})
         .sort({_id: 1})
         .exec(function (err, list_categories) {
         if (err) {
           return next(err);
         }
-        // Successful so send items to view
+        // Successful so send categories to view
         res.render('categoriesIndex', {
             title: 'Categories Index Page',
             all_categories: list_categories,
@@ -72,10 +72,80 @@ exports.createPOST = [
                     if (err) {
                         return next(err);
                     }
-                    // Successful: redirect to items page.
+                    // Successful: redirect to categories page.
                     res.redirect('/categories');
                 })
             }
         })
     } 
+]
+
+// Display proper information in update form
+exports.updateGET = (req, res) => {
+
+    // Get selected category 
+    category.findById(req.params.id)
+        .exec(function (err, category) {
+            if (err) {
+              return next(err);
+            }
+            // Successful so send category info to view
+            res.render('categoryUpdate', {
+                title: 'Update Category',
+                category: category,
+            })
+        })
+}
+
+// Update items information
+exports.updatePOST = [
+
+    // Validate and sanitize fields.
+    body("name", "Name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+    body("description", "Description must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+        
+        // There are errors. Render form again with sanitized values/error messages.
+        if (!errors.isEmpty()) {
+  
+            // Get selected category from the database 
+            category.findById(req.params.id)
+            .exec(function (err, category) {
+                if (err) {
+                return next(err);
+                }
+                // Successful so send category info to view
+                res.render('categoryUpdate', {
+                    title: 'Update Category',
+                    category: category,
+                })
+            })
+        }
+
+        const newCategory = new category({
+            name: req.body.name,
+            description: req.body.description,
+            _id: req.params.id, //This is required, or a new ID will be assigned!
+        });
+
+        // Data from form is valid. Update the record.
+        category.findByIdAndUpdate(req.params.id, newCategory, (err, results) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/categories');
+
+        });
+    }
 ]
