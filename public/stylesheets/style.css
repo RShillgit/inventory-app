@@ -34,13 +34,6 @@ a {
   flex-direction: column;
 }
 
-.individualOptionsMenu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
 .item_update_form_info, .category_update_form_info, .item_create_form_info, .category_create_form_info {
   display: flex;
   flex-direction: column;
@@ -66,8 +59,10 @@ a {
   justify-content: center;
   align-items: center;
 }
-.delete_confirmation_buttons {
+.form_buttons {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
 }
 

@@ -28,10 +28,11 @@ block content
                 label(for='item_stock') Number in stock: 
                 input#item_stock(type='number' value=(item.number_in_stock) required='true' name='number_in_stock')
 
-            a(href='/items/')  
-                button(type='button') Cancel
+            div(class='form_buttons')
+                a(href='/items/')  
+                    button(type='button') Cancel
 
-            button(type='submit') Update
+                button(type='submit') Update
     
     if errors
         ul
