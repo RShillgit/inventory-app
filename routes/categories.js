@@ -10,13 +10,13 @@ router.get('/', category_controller.index);
 
 /* GET request for creating a category */
 router.get('/create', function(req, res, next) {
-    res.send('Category Create GET');
+    res.render('categoryCreate', {
+        title: 'Create Category'
+    });
 });
 
 /* Post request for creating a category */
-router.post('/create', function(req, res, next) {
-    res.send('Category Create POST');
-});
+router.post('/create', category_controller.createPOST);
 
 /* GET request for one category */
 router.get('/:id', function(req, res, next) {

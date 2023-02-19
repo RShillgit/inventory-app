@@ -2,19 +2,27 @@ extends layout
 
 block content
 
-    h1= title
-    p #{message}
+    div(class='page-header')
+            h1=title
+
+    div(class='nav')
+        a(href='/items')  
+            button Items
+        a(href='/categories/create')  
+            button Create Category
+        
 
     div(class='allCategoriesContainer')
+
             each category in all_categories
                 div(class='individualCategory')
-                    ul
-                        li=category.name
-                        li=category.description
-                        li=category.url
 
-                        div(class='individualOptionsMenu')
-                            a(href='/categories/'+category.id + '/update')  
-                                button Edit
-                            a(href='/categories/'+category.id + '/delete')
-                                button Delete
+                    label Category Name: #{category.name}
+                    label Description: #{category.description}
+                    label URL: #{category.url}                   
+
+                    div(class='form_buttons')
+                        a(href='/categories/'+category.id + '/update')  
+                            button Edit
+                        a(href='/categories/'+category.id + '/delete')
+                            button Delete
